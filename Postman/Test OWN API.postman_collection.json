@@ -1,0 +1,669 @@
+{
+	"info": {
+		"_postman_id": "a11a97ae-7018-41be-8588-2e19d3a4b070",
+		"name": "Test OWN API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38903742"
+	},
+	"item": [
+		{
+			"name": "Get_All_Students_Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Status Code Validation\r",
+							"pm.test(\"Status_Check\",  ()=>\r",
+							" {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//Datatype assertion\r",
+							"const JsonOP = pm.response.json();\r",
+							"pm.test(\"Validate_Response_DataType\",  () => {\r",
+							"    \r",
+							"    pm.expect(JsonOP[0].Name).to.be.a(\"string\");\r",
+							"    pm.expect(JsonOP[0].SID).to.be.a(\"number\"); \r",
+							"    pm.expect(JsonOP[0].City).to.be.a(\"string\");\r",
+							"    pm.expect(JsonOP[0].Age).to.be.a(\"number\");\r",
+							"    pm.expect(JsonOP[0].Phone_Number).to.be.a(\"number\");\r",
+							"    pm.expect(JsonOP[0].Courses).to.be.an(\"array\");\r",
+							"    pm.expect(JsonOP[0].Courses[0]).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							"//Data Assertion\r",
+							"pm.test(\"Data_Validation\", ()=>\r",
+							"{\r",
+							"    pm.expect(JsonOP[0].City).to.eql(\"Texas\");\r",
+							"});\r",
+							"\r",
+							"//Json Schema Validation\r",
+							"const schema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+							"  \"title\": \"Generated schema for Root\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"SID\": {\r",
+							"      \"type\": \"number\"\r",
+							"    },\r",
+							"    \"Name\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"City\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"Age\": {\r",
+							"      \"type\": \"number\"\r",
+							"    },\r",
+							"    \"Email\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"Phone_Number\": {\r",
+							"      \"type\": \"number\"\r",
+							"    },\r",
+							"    \"Courses\": {\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": {\r",
+							"        \"type\": \"string\"\r",
+							"      }\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"SID\",\r",
+							"    \"Name\",\r",
+							"    \"City\",\r",
+							"    \"Age\",\r",
+							"    \"Email\",\r",
+							"    \"Phone_Number\",\r",
+							"    \"Courses\"\r",
+							"  ]\r",
+							"};\r",
+							"\r",
+							"pm.test(\"Schema Validation\", ()=>\r",
+							"{\r",
+							"    pm.expect(JsonOP[0]).to.have.jsonSchema(schema);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_Global}}Students",
+					"host": [
+						"{{URL_Global}}Students"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get_All_Students_Data",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Students",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Students"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "tinyhttp"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, HEAD, PUT, PATCH, POST, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 21:57:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "688"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"1\",\n        \"Name\": \"Student One\",\n        \"City\": \"Texas\",\n        \"Age\": \"18\",\n        \"Email\": \"Studentone@gmail.com\",\n        \"Phone Number\": \"7854612325\",\n        \"Courses\": [\n            \"API\",\n            \"Selenium\",\n            \"Java\"\n        ]\n    },\n    {\n        \"id\": \"2\",\n        \"Name\": \"Student Two\",\n        \"City\": \"Dallas\",\n        \"Age\": \"18\",\n        \"Email\": \"Studenttwo@gmail.com\",\n        \"Phone Number\": \"7852112325\",\n        \"Courses\": [\n            \"API\",\n            \"Selenium\",\n            \"Java\"\n        ]\n    },\n    {\n        \"id\": \"3\",\n        \"Name\": \"Student Three\",\n        \"City\": \"Texas\",\n        \"Age\": \"19\",\n        \"Email\": \"Studentthree@gmail.com\",\n        \"Phone Number\": \"7854612320\",\n        \"Courses\": [\n            \"API\",\n            \"REST API\",\n            \"Java\"\n        ]\n    }\n]"
+				},
+				{
+					"name": "Will All Validation Test Scripts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Students",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Students"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "tinyhttp"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, HEAD, PUT, PATCH, POST, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 18 Dec 2024 16:26:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "465"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"SID\": 1,\n        \"Name\": \"Student One\",\n        \"City\": \"Texas\",\n        \"Age\": 18,\n        \"Email\": \"Studentone@gmail.com\",\n        \"Phone_Number\": 7854612325,\n        \"Courses\": [\n            \"API\",\n            \"Selenium\",\n            \"Java\"\n        ],\n        \"id\": \"e224\"\n    },\n    {\n        \"SID\": 2,\n        \"Name\": \"Student Two\",\n        \"City\": \"Frisco\",\n        \"Age\": 17,\n        \"Email\": \"Studenttwo@gmail.com\",\n        \"Phone_Number\": 8854612325,\n        \"Courses\": [\n            \"API\",\n            \"Java\"\n        ],\n        \"id\": \"83a7\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get_Single_Student_Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Header_Content_Type\", ()=>\r",
+							"{\r",
+							"    pm.response.to.have.header(\"Content-Type\")\r",
+							"});\r",
+							"pm.test(\"Header_Content_Type_Validation\", ()=>\r",
+							"{\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+							"});\r",
+							"pm.test(\"Headers_Content_Length\", ()=>\r",
+							"{\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Length\")).to.eql(\"200\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_Global}}Students?SID=2",
+					"host": [
+						"{{URL_Global}}Students"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get_Single_Student_Data",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Students/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Students",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "tinyhttp"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, HEAD, PUT, PATCH, POST, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 21:58:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "200"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2\",\n    \"Name\": \"Student Two\",\n    \"City\": \"Dallas\",\n    \"Age\": \"18\",\n    \"Email\": \"Studenttwo@gmail.com\",\n    \"Phone Number\": \"7852112325\",\n    \"Courses\": [\n        \"API\",\n        \"Selenium\",\n        \"Java\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "POST_Add_New_Student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"SID\": 3,\r\n      \"Name\": \"Student Three\",\r\n      \"City\": \"Plano\",\r\n      \"Age\": 20,\r\n      \"Email\": \"Studentthree@gmail.com\",\r\n      \"Phone_Number\": 8754612325,\r\n      \"Courses\": [\r\n        \"API\",\r\n        \"Java\"\r\n      ]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_Global}}Students",
+					"host": [
+						"{{URL_Global}}Students"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST_Add_New_Student",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"Name\": \"Student Four\",\r\n    \"City\": \"Plano\",\r\n    \"Age\": \"18\",\r\n    \"Email\": \"Studentfour@gmail.com\",\r\n    \"Phone Number\": \"8970112325\",\r\n    \"Courses\": [\r\n        \"API\",\r\n        \"C#\",\r\n        \"Java\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Students",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Students"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "tinyhttp"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, HEAD, PUT, PATCH, POST, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 21:59:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "193"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"Name\": \"Student Four\",\n    \"City\": \"Plano\",\n    \"Age\": \"18\",\n    \"Email\": \"Studentfour@gmail.com\",\n    \"Phone Number\": \"8970112325\",\n    \"Courses\": [\n        \"API\",\n        \"C#\",\n        \"Java\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "PUT_Replace_Student",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n      \"SID\": 3,\r\n      \"Name\": \"Student Three Modified\",\r\n      \"City\": \"Plano Modified\",\r\n      \"Age\": 20,\r\n      \"Email\": \"Studentthree@gmail.com\",\r\n      \"Phone_Number\": 8754612325,\r\n      \"Courses\": [\r\n        \"API\",\r\n        \"Java\"\r\n      ]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/Students?SID=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Students"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "PUT_Replace_Student",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"id\": 4,\r\n      \"Name\": \"Student Four Modified\",\r\n      \"City\": \"Plano\",\r\n      \"Age\": \"18\",\r\n      \"Email\": \"Studentfour@gmail.com\",\r\n      \"Phone Number\": \"8970112325\",\r\n      \"Courses\": [\r\n        \"API\",\r\n        \"C#\",\r\n        \"Java\"\r\n      ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/Students/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Students",
+								"4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "tinyhttp"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, HEAD, PUT, PATCH, POST, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 22:05:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "204"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"4\",\n    \"Name\": \"Student Four Modified\",\n    \"City\": \"Plano\",\n    \"Age\": \"18\",\n    \"Email\": \"Studentfour@gmail.com\",\n    \"Phone Number\": \"8970112325\",\n    \"Courses\": [\n        \"API\",\n        \"C#\",\n        \"Java\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE_Added_Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check_Response_Time\", ()=>\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(50);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/Students?SID=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"Students"
+					],
+					"query": [
+						{
+							"key": "SID",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE_Added_Student",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/Students/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"Students",
+								"4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "tinyhttp"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, HEAD, PUT, PATCH, POST, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "content-type"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 17 Dec 2024 22:07:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "204"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"4\",\n    \"Name\": \"Student Four Modified\",\n    \"City\": \"Plano\",\n    \"Age\": \"18\",\n    \"Email\": \"Studentfour@gmail.com\",\n    \"Phone Number\": \"8970112325\",\n    \"Courses\": [\n        \"API\",\n        \"C#\",\n        \"Java\"\n    ]\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "JsonOP",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

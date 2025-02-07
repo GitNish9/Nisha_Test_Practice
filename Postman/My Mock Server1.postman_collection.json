@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "b935104a-8f08-4f9d-bbd8-e74829c7c7ad",
+		"name": "My Mock Server1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38903742"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/Post",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Post"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Request PayLoad\" : \"Sending POST Request with PayLoad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Post/Success",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Post",
+								"Success"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 21 Jan 2025 22:46:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=bd40e5c3bd899617"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=8e8bd13da7807a58"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "120"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "118"
+						},
+						{
+							"key": "X-RateLimit-Reset",
+							"value": "1737499640"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3d-ydPXblXHEWDx3SSV0bHEhaDEdSo\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"Message\": \"Mocked POST Successfully!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "{{url}}/Post/Fail",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Request PayLoad\" : \"Sending POST Request with PayLoad\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/Post/Success",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"Post",
+						"Success"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://5e0c6d1b-f585-4746-8476-79a95492b295.mock.pstmn.io"
+		}
+	]
+}

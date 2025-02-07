@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "944646a0-53ca-4436-95a8-3d2c022cd8b0",
+		"name": "Collection Scope",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38903742"
+	},
+	"item": [
+		{
+			"name": "Folder Scope",
+			"item": [
+				{
+					"name": "All_Records",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"Request Level Pre-Request Script\");\r",
+									"//Declare Local Variable\r",
+									"pm.variables.set(\"URL_Local\",\"http://localhost:3000/\");\r",
+									"\r",
+									"//Creating a Global Variable\r",
+									"pm.globals.set(\"Career\", \"QA\");\r",
+									"\r",
+									"//Creating a Environment Variable\r",
+									"pm.environment.set(\"Career_Env\", \"QATest\");\r",
+									"\r",
+									"//Creating a Collection Variable\r",
+									"pm.collectionVariables.set(\"Career_Collect\", \"SDET\");"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status Cherck\", ()=>\r",
+									"{\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"console.log(\"Test script executed at Post-Response Level\");\r",
+									"console.log(pm.globals.get(\"Career\"));\r",
+									"console.log(pm.environment.get(\"Career_Env\"));\r",
+									"console.log(pm.collectionVariables.get(\"Career_Collect\"));\r",
+									"console.log(pm.variables.get(\"URL_Local\"));\r",
+									"\r",
+									"//Unset the Global Variable\r",
+									"pm.globals.unset(\"Career\");\r",
+									"\r",
+									"//Unset the Environment Variable\r",
+									"pm.environment.unset(\"Career_Env\");\r",
+									"\r",
+									"//Unset the Collection Variable\r",
+									"pm.collectionVariables.unset(\"Career_Collect\");\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_Local}}Fruits",
+							"host": [
+								"{{URL_Local}}Fruits"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Scope of Variables",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL_Local}}Fruits",
+									"host": [
+										"{{URL_Local}}Fruits"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "tinyhttp"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, HEAD, PUT, PATCH, POST, DELETE"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "content-type"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 18 Dec 2024 18:55:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Content-Length",
+									"value": "167"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"FID\": 1,\n        \"Name\": \"Apple\",\n        \"Color\": \"Red\",\n        \"id\": \"3bc3\"\n    },\n    {\n        \"FID\": 2,\n        \"Name\": \"Mango\",\n        \"Color\": \"Yellow\",\n        \"id\": \"f952\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Add_Random_Fruits",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//Generating Random Names for Fruits\r",
+									"var random_name = Math.random().toString(36).substring(3);\r",
+									"//Creating Array for color names\r",
+									"const colorNames = [\r",
+									"  \"Red\", \"Green\", \"Blue\", \"Yellow\", \"Orange\", \"Purple\", \r",
+									"  \"Pink\", \"Brown\", \"Gray\", \"Black\", \"White\", \"Cyan\", \r",
+									"  \"Magenta\", \"Lime\", \"Teal\", \"Indigo\", \"Violet\", \"Maroon\"\r",
+									"];\r",
+									"\r",
+									"//Retrieving a value from array to a variable\r",
+									"var fru_color = colorNames[Math.floor(Math.random() * colorNames.length)];\r",
+									"\r",
+									"//Setting environment Variables\r",
+									"pm.environment.set(\"Fruit_Color\", fru_color);\r",
+									"pm.environment.set(\"Fruit_Name\", random_name);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"Name\": \"{{Fruit_Name}}\",\r\n        \"Color\": \"{{Fruit_Color}}\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_Global}}Fruits",
+							"host": [
+								"{{URL_Global}}Fruits"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"console.log(\"Folder Level Pre-Request\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"console.log(\"Folder Level Post-Response\");"
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"console.log(\"Collection Level Pre-Request\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"console.log(\"Collection Level Post-Response\");"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_Collect",
+			"value": "http://localhost:3000/",
+			"type": "string"
+		}
+	]
+}

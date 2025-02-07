@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "f6df056e-511d-40b8-bdf7-a0cbca3dcefc",
+		"name": "API Chaining",
+		"description": "Run the JSON server locally\n\njson -server Student_Record.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38903742"
+	},
+	"item": [
+		{
+			"name": "Create_Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var JsonOP = pm.response.json();\r",
+							"console.log(\"The Record to be accessed has ID :\", JsonOP.id);\r",
+							"//Setting Environment Variable to access Student ID\r",
+							"pm.environment.set(\"Student_ID\", JsonOP.id);\r",
+							"pm.test(\"Status Check\", ()=>\r",
+							"{\r",
+							"pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var random_value = Math.random().toString(36).substring(3);\r",
+							"var S_email = random_value+\"@gmail.com\";\r",
+							"\r",
+							"pm.environment.set(\"Stu_name\", random_value);\r",
+							"pm.environment.set(\"Stu_email\", S_email);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"SID\": 4,\r\n    \"Name\": \"{{Stu_name}}\",\r\n    \"City\": \"McKinney\",\r\n    \"Age\": 16,\r\n    \"Email\": \"{{Stu_email}}\",\r\n    \"Phone_Number\": 7854612645,\r\n    \"Courses\": [\r\n      \"API Chaining\",\r\n      \"Json\",\r\n      \"Selenium\",\r\n      \"Java\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_Global}}Students",
+					"host": [
+						"{{URL_Global}}Students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Created_Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var JsonOP = pm.response.json();\r",
+							"console.log(\"Environment Variable is used to access the created Student Record\");\r",
+							"pm.test(\"Verify Student & Status Code\", ()=>\r",
+							"{\r",
+							"pm.expect(JsonOP.SID).to.eql(4);\r",
+							"pm.response.to.have.status(200);\r",
+							"});\r",
+							"console.log(\"Student Record id validated against Student ID\");\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_Global}}Students/{{Student_ID}}",
+					"host": [
+						"{{URL_Global}}Students"
+					],
+					"path": [
+						"{{Student_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Created_Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"console.log(\"The Student is created, accessed and deleted successfully using Environment Variable!!\");\r",
+							"pm.test(\"Status Check\", ()=>\r",
+							"{\r",
+							"pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.environment.unset(\"Student_ID\");"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL_Global}}Students/{{Student_ID}}",
+					"host": [
+						"{{URL_Global}}Students"
+					],
+					"path": [
+						"{{Student_ID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

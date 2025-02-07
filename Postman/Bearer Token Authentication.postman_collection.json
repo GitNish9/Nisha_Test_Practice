@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "6c4465de-d070-408c-bd55-0ee55303982b",
+		"name": "Bearer Token Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38903742"
+	},
+	"item": [
+		{
+			"name": "Get_All_Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_GoRest}}public/v2/users/",
+					"host": [
+						"{{URL_GoRest}}public"
+					],
+					"path": [
+						"v2",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_New_user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL_GoRest}}public/v2/users",
+					"host": [
+						"{{URL_GoRest}}public"
+					],
+					"path": [
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Posted_User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_GoRest}}public/v2/users/6944456",
+					"host": [
+						"{{URL_GoRest}}public"
+					],
+					"path": [
+						"v2",
+						"users",
+						"6944456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update_Posted_User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{URL_GoRest}}public/v2/users/6944456",
+					"host": [
+						"{{URL_GoRest}}public"
+					],
+					"path": [
+						"v2",
+						"users",
+						"6944456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Posted_User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL_GoRest}}public/v2/users/6944456",
+					"host": [
+						"{{URL_GoRest}}public"
+					],
+					"path": [
+						"v2",
+						"users",
+						"6944456"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{vault:authorization-secret}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_GoRest",
+			"value": "https://gorest.co.in/"
+		}
+	]
+}

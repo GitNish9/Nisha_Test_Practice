@@ -1,0 +1,139 @@
+{
+	"id": "ff894846-5ac0-47ab-8658-90fff58ce207",
+	"name": "API Chaining",
+	"timestamp": "2025-01-07T23:02:00.818Z",
+	"collection_id": "38903742-f6df056e-511d-40b8-bdf7-a0cbca3dcefc",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 9,
+	"delay": "5",
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-01-07T23:01:58.195Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "59d243c4-29f8-4fda-8301-24b314f339bf",
+			"name": "Create_Student",
+			"url": "http://localhost:3000/Students",
+			"time": 9,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status Check": true
+			},
+			"testPassFailCounts": {
+				"Status Check": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				653,
+				9,
+				9
+			],
+			"allTests": [
+				{
+					"Status Check": true
+				},
+				{
+					"Status Check": true
+				},
+				{
+					"Status Check": true
+				}
+			]
+		},
+		{
+			"id": "b21d8fd3-ba26-4e3a-b929-55655edd43b0",
+			"name": "Get_Created_Student",
+			"url": "http://localhost:3000/Students/1d56",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify Student & Status Code": true
+			},
+			"testPassFailCounts": {
+				"Verify Student & Status Code": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				8,
+				5,
+				6
+			],
+			"allTests": [
+				{
+					"Verify Student & Status Code": true
+				},
+				{
+					"Verify Student & Status Code": true
+				},
+				{
+					"Verify Student & Status Code": true
+				}
+			]
+		},
+		{
+			"id": "6a3b5c98-3019-47ff-94bb-6cdbf1a5315c",
+			"name": "Delete_Created_Student",
+			"url": "http://localhost:3000/Students/1d56",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status Check": true
+			},
+			"testPassFailCounts": {
+				"Status Check": {
+					"pass": 3,
+					"fail": 0
+				}
+			},
+			"times": [
+				18,
+				8,
+				14
+			],
+			"allTests": [
+				{
+					"Status Check": true
+				},
+				{
+					"Status Check": true
+				},
+				{
+					"Status Check": true
+				}
+			]
+		}
+	],
+	"count": 3,
+	"totalTime": 730,
+	"collection": {
+		"requests": [
+			{
+				"id": "59d243c4-29f8-4fda-8301-24b314f339bf",
+				"method": "POST"
+			},
+			{
+				"id": "b21d8fd3-ba26-4e3a-b929-55655edd43b0",
+				"method": "GET"
+			},
+			{
+				"id": "6a3b5c98-3019-47ff-94bb-6cdbf1a5315c",
+				"method": "DELETE"
+			}
+		]
+	}
+}
